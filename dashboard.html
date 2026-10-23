@@ -11,17 +11,19 @@
 <link rel="stylesheet" href="components.css">
 <script src="icons.js"></script>
 <script src="grain.js" defer></script>
+<script src="forms.js" defer></script>
 <style>
   body { --o-offset-top: 36px; overflow: hidden; }
-  [data-board][hidden], [data-list][hidden] { display: none; }
+  [data-board][hidden], [data-list][hidden], .o-row.is-miss { display: none; }
 </style>
 </head>
 <body>
 <div class="o-sitebar"><div class="o-wrap o-sitebar__inner"><a class="o-sitebar__name" href="index.html"><svg class="o-ic"><use href="#i-orbit"/></svg>Orbit <span>design system</span></a><a class="o-sitebar__link" href="index.html">Design system</a><a class="o-sitebar__link" href="landing.html">Landing</a><a class="o-sitebar__link is-active" href="dashboard.html" aria-current="page">Dashboard</a></div></div>
 <div class="o-app o-app--full" id="app">
+  <p class="o-sr" role="status" aria-live="polite" data-search-status></p>
   <div class="o-topbar">
-      <div class="o-ws"><button class="o-menu-btn" type="button" aria-label="Open navigation" data-nav-toggle><svg class="o-ic"><use href="#i-menu"/></svg></button><span class="o-ws__logo"><svg class="o-ic"><use href="#i-orbit"/></svg></span>Northwind <svg class="o-ic o-ws__chev"><use href="#i-chev"/></svg></div>
-      <label class="o-search"><svg class="o-ic"><use href="#i-search"/></svg><input type="search" placeholder="Search Northwind" aria-label="Search"><kbd class="o-kbd">⌘K</kbd></label>
+      <div class="o-ws"><button class="o-menu-btn" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><svg class="o-ic"><use href="#i-menu"/></svg></button><span class="o-ws__logo"><svg class="o-ic"><use href="#i-orbit"/></svg></span>Northwind <svg class="o-ic o-ws__chev"><use href="#i-chev"/></svg></div>
+      <form class="o-search" role="search" action="#" data-o-search data-o-shortcut="k"><button class="o-search__btn" type="button" aria-label="Search Northwind" aria-expanded="false"><svg class="o-ic"><use href="#i-search"/></svg></button><svg class="o-ic"><use href="#i-search"/></svg><label class="o-sr" for="app-search">Search Northwind</label><input id="app-search" name="q" type="search" placeholder="Search Northwind" autocomplete="off" spellcheck="false" data-1p-ignore data-lpignore="true" aria-keyshortcuts="Meta+K Control+K"><kbd class="o-kbd" data-o-kbd="K" aria-hidden="true">⌘K</kbd></form>
       <div class="o-topbar__right"><svg class="o-ic"><use href="#i-bell"/></svg><svg class="o-ic"><use href="#i-help"/></svg><span class="o-ask"><svg class="o-ic"><use href="#i-spark"/></svg><span class="o-ask__label">Ask AI</span></span><span class="o-me" aria-label="Your account"></span></div>
     </div>
   <div class="o-app__body">
@@ -76,9 +78,9 @@
       <div class="o-toolbar">
           <div class="o-toolbar__title"><svg class="o-ic"><use href="#i-layers"/></svg>Work items <span class="o-badge" data-count>112</span></div>
           <div class="o-toolbar__right">
-            <button class="o-chip" type="button" data-chip="view"><svg class="o-ic"><use href="#i-list"/></svg><span class="o-chip__label">List</span></button>
-            <button class="o-chip" type="button" data-chip="filter"><svg class="o-ic"><use href="#i-filter"/></svg><span class="o-chip__label">Filter</span></button>
-            <button class="o-chip" type="button" data-chip="display"><svg class="o-ic"><use href="#i-sliders"/></svg><span class="o-chip__label">Display</span></button>
+            <button class="o-chip" type="button" aria-pressed="false" data-chip="view"><svg class="o-ic"><use href="#i-list"/></svg><span class="o-chip__label">List</span></button>
+            <button class="o-chip" type="button" aria-pressed="false" data-chip="filter"><svg class="o-ic"><use href="#i-filter"/></svg><span class="o-chip__label">Filter</span></button>
+            <button class="o-chip" type="button" aria-pressed="false" data-chip="display"><svg class="o-ic"><use href="#i-sliders"/></svg><span class="o-chip__label">Display</span></button>
             <button class="o-btn o-btn--app o-btn--accent" type="button" data-new><svg class="o-ic o-ic--sm o-btn__icon-sm"><use href="#i-plus"/></svg><span class="o-btn__label">Add work item</span></button>
           </div>
         </div>
@@ -113,7 +115,7 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || app).querySelectorAll(s)); };
   function activate(list, el) { list.forEach(function (x) { x.classList.toggle('is-active', x === el); x.setAttribute('aria-selected', x === el); }); }
   function show(name) { $$('[data-view]').forEach(function (v) { v.hidden = v.dataset.view !== name; }); }
-  function closeNav() { app.classList.remove('is-nav-open'); }
+  function closeNav() { app.classList.remove('is-nav-open'); $('[data-nav-toggle]').setAttribute('aria-expanded', 'false'); }
 
   // tabs switch views
   var tabs = $$('[data-tab]');
@@ -144,12 +146,12 @@
   var list = $('[data-list]'), board = $('[data-board]');
   $('[data-chip="view"]').addEventListener('click', function () {
     var toBoard = board.hidden; board.hidden = !toBoard; list.hidden = toBoard;
-    this.classList.toggle('is-active', toBoard);
+    this.setAttribute('aria-pressed', toBoard);
     this.querySelector('use').setAttribute('href', toBoard ? '#i-board' : '#i-list');
     this.querySelector('.o-chip__label').textContent = toBoard ? 'Board' : 'List';
   });
   $('[data-chip="filter"]').addEventListener('click', function () {
-    var on = this.classList.toggle('is-active');
+    var on = this.getAttribute('aria-pressed') !== 'true'; this.setAttribute('aria-pressed', on);
     $$('[data-pri]').forEach(function (r) { r.classList.toggle('is-hidden', on && !/urgent|high/.test(r.dataset.pri)); });
     $$('.o-kcard.is-hidden').forEach(function (k) { k.style.display = 'none'; });
     $$('.o-kcard:not(.is-hidden)').forEach(function (k) { k.style.display = ''; });
@@ -157,7 +159,7 @@
     this.querySelector('.o-chip__label').textContent = on ? 'Urgent + high' : 'Filter';
   });
   $('[data-chip="display"]').addEventListener('click', function () {
-    this.classList.toggle('is-active', list.classList.toggle('is-compact'));
+    this.setAttribute('aria-pressed', list.classList.toggle('is-compact'));
   });
 
   // new work item: add a row to the top of Backlog
@@ -174,12 +176,25 @@
   }); });
 
   // mobile drawer
-  $('[data-nav-toggle]').addEventListener('click', function () { app.classList.toggle('is-nav-open'); });
+  $('[data-nav-toggle]').addEventListener('click', function () { this.setAttribute('aria-expanded', app.classList.toggle('is-nav-open')); });
   $('[data-nav-close]').addEventListener('click', closeNav);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeNav();
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); $('.o-search input').focus(); }
   });
+
+  // search (role=search form): filters work items by title or ID as you type; Enter keeps the result
+  // forms.js handles the collapsed button on narrow screens, Cmd/Ctrl+K, and Esc (clear, then blur)
+  var search = $('[data-o-search]'), q = search.querySelector('input'), said = $('[data-search-status]');
+  function runSearch() {
+    var term = q.value.trim().toLowerCase();
+    if (term) { activate(tabs, $('[data-tab="Work items"]')); show('Work items'); activate(rails, rails[0]); list.hidden = false; board.hidden = true; }
+    $$('.o-row[data-pri]', list).forEach(function (r) { r.classList.toggle('is-miss', !!term && r.textContent.toLowerCase().indexOf(term) < 0); });
+    var hits = list.querySelectorAll('.o-row[data-pri]:not(.is-miss)').length;
+    $('[data-count]').textContent = term ? String(hits) : '112';
+    said.textContent = term ? hits + (hits === 1 ? ' work item matches' : ' work items match') + ' “' + q.value.trim() + '”' : '';
+  }
+  q.addEventListener('input', runSearch);
+  search.addEventListener('submit', function (e) { e.preventDefault(); runSearch(); q.blur(); });
 })();
 </script>
 </body>

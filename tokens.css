@@ -188,4 +188,21 @@
   --o-z-border: 10;   /* surface inner border */
   --o-z-drawer: 40;
   --o-z-overlay: 50;
+  /* ---------- forms and access ---------- */
+  --o-focus-color: var(--o-accent);   /* keyboard focus outline */
+  --o-focus-width: 2px;
+  --o-focus-offset: 2px;
+  --o-hit: 44px;                      /* minimum hit area on touch */
+  --o-input-size: 15px;               /* 16px on coarse pointers (no iOS zoom) */
+  --o-app-input-size: var(--o-app-text);
+  --o-red-ring: 0 0 0 3px rgba(217,58,43,.2);
+  --o-disabled-opacity: .45;
+  --o-app-bar: 36px;                  /* app top bar height; 44px for o-app--full on touch */
+  --o-app-row: 38px;                  /* page header and toolbar rows */
 }
+
+/* touch devices: 16px inputs, taller app bars in the full-screen app */
+@media (pointer: coarse) {
+  :root { --o-input-size: 16px; --o-app-input-size: 16px; }
+}
+

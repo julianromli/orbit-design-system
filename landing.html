@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="components.css">
 <script src="icons.js"></script>
 <script src="grain.js" defer></script>
+<script src="forms.js" defer></script>
 </head>
 <body>
 <div class="o-sitebar"><div class="o-wrap o-sitebar__inner"><a class="o-sitebar__name" href="index.html"><svg class="o-ic"><use href="#i-orbit"/></svg>Orbit <span>design system</span></a><a class="o-sitebar__link" href="index.html">Design system</a><a class="o-sitebar__link is-active" href="landing.html" aria-current="page">Landing</a><a class="o-sitebar__link" href="dashboard.html">Dashboard</a></div></div>
@@ -99,7 +100,7 @@
         <p class="o-eyebrow">Pricing</p>
         <h2 class="o-h2">Simple plans that grow with your team</h2>
         <p class="o-lede">Start free. Upgrade when you add agents or more teams.</p>
-        <div class="o-segment" role="group" aria-label="Billing period" style="margin-top:var(--o-space-10)"><button type="button" data-bill="monthly">Monthly</button><button type="button" class="is-active" data-bill="yearly">Yearly, save 20%</button></div>
+        <div class="o-segment" role="group" aria-label="Billing period" style="margin-top:var(--o-space-10)"><button type="button" aria-pressed="false" data-bill="monthly">Monthly</button><button type="button" class="is-active" aria-pressed="true" data-bill="yearly">Yearly, save 20%</button></div>
       </div>
       <div class="o-grid"><article class="o-card o-price">
         <div><p class="o-price__name">Free </p><p class="o-small" style="margin-top:var(--o-space-2)">For small teams that start out.</p></div>
@@ -132,10 +133,16 @@
       <div class="o-cta">
         <h2 class="o-h2">Plan your next cycle in Orbit</h2>
         <p class="o-lede">Set up a workspace in two minutes. Invite your team and your agents.</p>
-        <form class="o-inline-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Check your inbox'">
-          <label class="o-sr" for="cta-email">Work email</label>
-          <input class="o-input" id="cta-email" type="email" placeholder="you@company.com" required>
-          <button class="o-btn o-btn--primary" type="submit">Get started</button>
+        <form class="o-cta__form" id="cta-form" action="#" novalidate data-o-validate data-o-async>
+          <div class="o-inline-form">
+            <div class="o-field">
+              <label class="o-sr" for="cta-email">Work email</label>
+              <input class="o-input" id="cta-email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="you@company.com" required aria-describedby="cta-email-error">
+              <p class="o-error" id="cta-email-error"></p>
+            </div>
+            <button class="o-btn o-btn--primary" type="submit" data-o-loading="Sending link…">Get started</button>
+          </div>
+          <p class="o-form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -155,9 +162,13 @@
 <script>
 document.querySelectorAll('[data-bill]').forEach(function (b) {
   b.addEventListener('click', function () {
-    document.querySelectorAll('[data-bill]').forEach(function (x) { x.classList.toggle('is-active', x === b); });
     document.querySelectorAll('[data-monthly]').forEach(function (p) { p.textContent = '$' + p.dataset[b.dataset.bill]; });
   });
+});
+// CTA: forms.js validates, shows the loading button, then we report back in the live status line
+document.getElementById('cta-form').addEventListener('o:submit', function (e) {
+  var email = this.elements.email.value.trim();
+  setTimeout(function () { e.detail.done('Check your inbox. We sent a sign-in link to ' + email + '.', true); }, 1200);
 });
 </script>
 </body>
