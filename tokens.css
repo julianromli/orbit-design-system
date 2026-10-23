@@ -1,0 +1,191 @@
+/* Orbit design system: tokens.css
+   Single source of truth. All values come from the Orbit hero demo.
+   Link this file first, then components.css. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
+
+:root {
+  /* ---------- neutrals (cool grey ramp) ---------- */
+  --o-gray-0:   #ffffff;
+  --o-gray-10:  #fcfcfd;  /* app chrome: topbar, rail, sidebar */
+  --o-gray-25:  #fafafb;  /* row hover */
+  --o-gray-50:  #f8f8fa;  /* group header */
+  --o-gray-75:  #f1f1f3;  /* row divider */
+  --o-gray-100: #f0f0f3;  /* active tab */
+  --o-gray-120: #ededf1;  /* active sidebar item */
+  --o-gray-150: #ececef;  /* line */
+  --o-gray-200: #e4e4e8;  /* line-2, control ring */
+  --o-gray-250: #d9d9de;  /* button ring */
+  --o-gray-300: #a1a1aa;
+  --o-gray-350: #9a9aa2;  /* placeholder */
+  --o-gray-400: #8a8a93;  /* tertiary text */
+  --o-gray-450: #7b7b84;
+  --o-gray-500: #6f6f78;  /* icon */
+  --o-gray-550: #63636c;  /* muted text */
+  --o-gray-600: #5d5d66;
+  --o-gray-650: #44444c;
+  --o-gray-700: #3a3a42;  /* item text */
+  --o-gray-750: #3d3d44;
+  --o-gray-800: #26262c;
+  --o-gray-850: #1d1d22;  /* app text */
+  --o-gray-900: #111114;  /* headline */
+  --o-gray-950: #0e0e10;  /* ink */
+
+  /* ---------- semantic colours ---------- */
+  --o-ink: var(--o-gray-950);
+  --o-bg: var(--o-gray-0);
+  --o-surface: var(--o-gray-0);
+  --o-surface-sunken: var(--o-gray-10);
+  --o-surface-hover: var(--o-gray-25);
+  --o-surface-subtle: var(--o-gray-50);
+  --o-surface-active: var(--o-gray-120);
+  --o-text: var(--o-gray-950);
+  --o-text-strong: var(--o-gray-900);
+  --o-text-app: var(--o-gray-850);
+  --o-text-2: var(--o-gray-700);
+  --o-text-muted: var(--o-gray-550);
+  --o-text-subtle: var(--o-gray-400);
+  --o-text-placeholder: var(--o-gray-350);
+  --o-text-on-ink: #ffffff;
+  --o-line: var(--o-gray-150);
+  --o-line-2: var(--o-gray-200);
+  --o-line-soft: var(--o-gray-75);
+  --o-line-strong: var(--o-gray-250);
+
+  /* ---------- accent + status ---------- */
+  --o-accent: #1f6fd1;
+  --o-accent-soft: #e8f0fc;
+  --o-accent-tint: #c9d9f1;
+  --o-red: #d93a2b;     --o-red-soft: #fde8e6;
+  --o-orange: #e57a14;  --o-orange-soft: #fff1e0;
+  --o-yellow: #c59a06;  --o-yellow-soft: #fff7d6;  --o-yellow-tint: #e7d9a3;
+  --o-green: #2f9e5b;   --o-green-soft: #eef7f0;
+  --o-estimate: #c99a3a;
+
+  /* label dots and avatars */
+  --o-label-purple: #8b5cf6;
+  --o-label-sky: #0ea5e9;
+  --o-label-orange: #f97316;
+  --o-label-emerald: #10b981;
+  --o-label-red: #ef4444;
+  --o-label-slate: #64748b;
+  --o-label-green: #22a06b;
+  --o-label-amber: #f59e0b;
+  --o-label-gray: #6b7280;
+
+  /* emoji tiles */
+  --o-tile-peach: #fde7d3;
+  --o-tile-blue: #e3eefc;
+  --o-tile-mint: #e6f4ea;
+
+  /* ---------- grainy gradient: "sand to rust" ---------- */
+  /* base stops, top (light, cool) to bottom (dark, warm) */
+  --o-gg-0: #d3d1ca;  /* sand-grey */
+  --o-gg-1: #dccdb3;  /* pale sand */
+  --o-gg-2: #c99a69;  /* ochre */
+  --o-gg-3: #94502b;  /* rust */
+  --o-gg-4: #2c160d;  /* deep brown floor */
+  --o-gg-base: linear-gradient(180deg, var(--o-gg-0) 0%, var(--o-gg-1) 30%, var(--o-gg-2) 55%, var(--o-gg-3) 78%, var(--o-gg-4) 100%);
+  /* blobs, each at the height of its colour band */
+  --o-gg-blob-1: #cdcfcb;  /* cool warm-grey, top-left */
+  --o-gg-blob-2: #e0d5c2;  /* pale sand, top-right */
+  --o-gg-blob-3: #e6b679;  /* bright ochre accent, mid-left edge */
+  --o-gg-blob-4: #b35a2a;  /* rust, lower-right edge */
+  --o-gg-blob-5: #3a1a0d;  /* deep brown, below bottom edge */
+  --o-gg-blur: 18px;
+  --o-gg-grain-opacity: .4;      /* overlay blend */
+  --o-gg-grain-amp: 70;          /* noise 128 +/- 70 (read by grain.js) */
+  --o-gg-pattern-opacity: .16;
+  --o-gg-border: rgba(0,0,0,.14); /* 0.5px inner border */
+  --o-avatar-me: linear-gradient(135deg, #f0b48a, #b6633a);
+
+  /* ---------- typography ---------- */
+  --o-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* variable weights used by the demo */
+  --o-w-regular: 400;
+  --o-w-book: 450;
+  --o-w-display: 460;   /* headlines: never bold */
+  --o-w-medium: 500;
+  --o-w-strong: 520;    /* active items */
+  --o-w-semibold: 550;
+  --o-w-brand: 560;
+  --o-w-bold: 600;
+
+  /* marketing scale: size / line-height / tracking */
+  --o-display-size: clamp(40px, 4.8vw, 62px); --o-display-lh: 1.1;  --o-display-track: -0.035em;
+  --o-h2-size: clamp(30px, 3.4vw, 42px);      --o-h2-lh: 1.12;      --o-h2-track: -0.032em;
+  --o-h3-size: 20px;                           --o-h3-lh: 1.3;       --o-h3-track: -0.02em;
+  --o-lede-size: 17px;   --o-lede-lh: 1.6;    --o-lede-track: -0.006em;
+  --o-body-size: 15px;   --o-body-lh: 1.6;    --o-body-track: -0.006em;
+  --o-btn-size: 15.5px;  --o-btn-track: -0.012em;
+  --o-nav-size: 14.5px;  --o-nav-track: -0.01em;
+  --o-small-size: 13px;  --o-small-lh: 1.5;
+  --o-eyebrow-size: 12.5px; --o-eyebrow-track: 0.02em;
+  --o-brand-size: 19px;  --o-brand-track: -0.03em;
+  --o-logo-size: 17px;   --o-logo-track: -0.03em;
+  /* app (product UI) scale */
+  --o-app-title: 12.5px;
+  --o-app-text: 12px;
+  --o-app-sm: 11.5px;
+  --o-app-xs: 11px;
+  --o-app-2xs: 10.5px;
+  --o-app-3xs: 10px;
+  --o-app-rail: 9.5px;
+  --o-app-track: -0.005em;
+
+  /* ---------- spacing (px, from the demo) ---------- */
+  --o-space-1: 2px;
+  --o-space-2: 4px;
+  --o-space-3: 6px;
+  --o-space-4: 8px;
+  --o-space-5: 10px;
+  --o-space-6: 12px;
+  --o-space-7: 14px;
+  --o-space-8: 18px;
+  --o-space-9: 24px;
+  --o-space-10: 32px;
+  --o-space-11: 44px;
+  --o-space-12: 58px;
+  --o-space-13: 72px;
+  --o-wrap: 1120px;
+  --o-gutter: 24px;         /* each side; wrap = 100% - 48px */
+  --o-nav-h: 60px;
+
+  /* ---------- radii ---------- */
+  --o-radius-xs: 4px;   /* count badge, emoji tile */
+  --o-radius-sm: 5px;   /* tag, date, logo tile */
+  --o-radius-md: 6px;   /* app controls */
+  --o-radius-lg: 8px;   /* small button */
+  --o-radius-btn: 9px;  /* main button */
+  --o-radius-window: 10px; /* app window, card */
+  --o-radius-panel: 16px;  /* gradient surface */
+  --o-radius-pill: 999px;
+
+  /* ---------- shadows ---------- */
+  --o-ring: inset 0 0 0 1px var(--o-line-2);
+  --o-ring-strong: inset 0 0 0 1px var(--o-line-strong);
+  --o-shadow-window: 0 0 0 1px rgba(30,15,5,.10), 0 2px 4px rgba(40,20,8,.06), 0 24px 60px -12px rgba(50,22,8,.40);
+  --o-shadow-card: 0 0 0 1px rgba(14,14,16,.07), 0 1px 2px rgba(14,14,16,.04);
+  --o-shadow-pop: 0 0 0 1px rgba(14,14,16,.08), 0 8px 24px -8px rgba(14,14,16,.18);
+  --o-shadow-avatar: 0 0 0 1.5px #fff;
+  --o-shadow-focus: 0 0 0 3px rgba(31,111,209,.28);
+
+  /* ---------- motion ---------- */
+  --o-ease-out: cubic-bezier(.2,.8,.2,1);
+  --o-dur-fast: .15s;
+  --o-dur-base: .25s;
+  --o-dur-drift-min: 20s;  /* blob drift 20-28s */
+  --o-dur-drift-max: 28s;
+  --o-spring-stiffness: 70;   /* read by grain.js */
+  --o-spring-damping: .86;
+  --o-hover-blob-shift: 9;    /* % of surface */
+  --o-hover-pattern-shift: 3; /* % of surface, opposite direction */
+
+  /* ---------- z-index ---------- */
+  --o-z-base: 0;
+  --o-z-nav: 2;
+  --o-z-grain: 5;
+  --o-z-content: 6;   /* content above grain */
+  --o-z-border: 10;   /* surface inner border */
+  --o-z-drawer: 40;
+  --o-z-overlay: 50;
+}
