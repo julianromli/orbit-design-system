@@ -4,6 +4,26 @@ Orbit is a small HTML and CSS design system. It comes from the Orbit hero demo. 
 
 It has no build step and no framework. Plain HTML, CSS and a little JavaScript.
 
+Live: [https://julianromli.github.io/orbit-design-system/](https://julianromli.github.io/orbit-design-system/)
+
+## Preview
+
+### Design system ([live](https://julianromli.github.io/orbit-design-system/))
+
+<p><img src="screenshots/readme/index-desktop.jpg" alt="Design system page on desktop" width="78%"> <img src="screenshots/readme/index-mobile.jpg" alt="Design system page on mobile" width="19%"></p>
+
+### Landing ([live](https://julianromli.github.io/orbit-design-system/landing.html))
+
+<p><img src="screenshots/readme/landing-desktop.jpg" alt="Landing page on desktop" width="78%"> <img src="screenshots/readme/landing-mobile.jpg" alt="Landing page on mobile" width="19%"></p>
+
+### Dashboard: work items ([live](https://julianromli.github.io/orbit-design-system/dashboard.html))
+
+<p><img src="screenshots/readme/dashboard-desktop.jpg" alt="Dashboard work items view on desktop" width="78%"> <img src="screenshots/readme/dashboard-mobile.jpg" alt="Dashboard work items view on mobile" width="19%"></p>
+
+### Dashboard: overview
+
+<p><img src="screenshots/readme/dashboard-overview-desktop.jpg" alt="Dashboard overview with the grainy gradient banner on desktop" width="78%"> <img src="screenshots/readme/dashboard-overview-mobile.jpg" alt="Dashboard overview on mobile" width="19%"></p>
+
 ## The three pages
 
 | Page | What it shows |
